@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import * as XLSX from "xlsx";
 
 function App() {
 
@@ -90,6 +91,18 @@ const handleSubmit = (e) => {
     return <h2>Loading students...</h2>;
   }
 
+  const downloadExcel = () => {
+
+  const worksheet = XLSX.utils.json_to_sheet(students);
+
+  const workbook = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Students");
+
+  XLSX.writeFile(workbook, "students.xlsx");
+
+};
+
   return (
     <div style={{ padding: "20px" }}>
 
@@ -133,6 +146,10 @@ const handleSubmit = (e) => {
         </button>
 
       </form>
+
+      <button onClick={downloadExcel}>
+        Download Excel
+      </button>
 
       <table border="1" cellPadding="10">
 
