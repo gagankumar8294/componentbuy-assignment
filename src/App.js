@@ -5,9 +5,9 @@ import "./App.css";
 function App() {
 
   const [students, setStudents] = useState([
-    { id: 1, name: "Gagan", email: "gagan@gmail.com", age: 23 },
-    { id: 2, name: "Ravi", email: "ravi@gmail.com", age: 24 },
-    { id: 3, name: "Arjun", email: "arjun@gmail.com", age: 22 }
+    { id: 1, name: "Gagan Kumar", email: "gagankumar8294@gmail.com", age: 24 },
+    { id: 2, name: "Viking", email: "viking@gmail.com", age: 23 },
+    { id: 3, name: "Leonardo", email: "dicaprio@gmail.com", age: 22 }
   ]);
 
   const [formData, setFormData] = useState({
@@ -18,6 +18,7 @@ function App() {
 
   const [loading, setLoading] = useState(true);
   const [editId, setEditId] = useState(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
@@ -31,6 +32,7 @@ function App() {
       email: student.email,
       age: student.age
     });
+
     setEditId(student.id);
   };
 
@@ -53,6 +55,12 @@ function App() {
       setStudents(updatedStudents);
       setEditId(null);
 
+      setMessage("Student updated successfully!");
+
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
+
     } else {
 
       const newStudent = {
@@ -63,6 +71,12 @@ function App() {
       };
 
       setStudents([...students, newStudent]);
+
+      setMessage("Student added successfully!");
+
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
     }
 
     setFormData({
@@ -74,13 +88,23 @@ function App() {
 
   const handleDelete = (id) => {
 
-    const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this student?"
+    );
 
     if (!confirmDelete) return;
 
-    const updatedStudents = students.filter((student) => student.id !== id);
+    const updatedStudents = students.filter(
+      (student) => student.id !== id
+    );
 
     setStudents(updatedStudents);
+
+    setMessage("Student deleted successfully!");
+
+    setTimeout(() => {
+      setMessage("");
+    }, 2000);
   };
 
   const downloadExcel = () => {
@@ -100,7 +124,13 @@ function App() {
   return (
     <div className="container">
 
-      <h1>Students Table</h1>
+      <h1>Students Table - Gagan Kumar</h1>
+
+      {message && (
+        <div className="success-message">
+          {message}
+        </div>
+      )}
 
       <h2>{editId ? "Edit Student" : "Add Student"}</h2>
 
@@ -111,7 +141,10 @@ function App() {
           placeholder="Name"
           value={formData.name}
           onChange={(e) =>
-            setFormData({ ...formData, name: e.target.value })
+            setFormData({
+              ...formData,
+              name: e.target.value
+            })
           }
         />
 
@@ -120,7 +153,10 @@ function App() {
           placeholder="Email"
           value={formData.email}
           onChange={(e) =>
-            setFormData({ ...formData, email: e.target.value })
+            setFormData({
+              ...formData,
+              email: e.target.value
+            })
           }
         />
 
@@ -129,7 +165,10 @@ function App() {
           placeholder="Age"
           value={formData.age}
           onChange={(e) =>
-            setFormData({ ...formData, age: e.target.value })
+            setFormData({
+              ...formData,
+              age: e.target.value
+            })
           }
         />
 
@@ -139,7 +178,10 @@ function App() {
 
       </form>
 
-      <button className="download-btn" onClick={downloadExcel}>
+      <button
+        className="download-btn"
+        onClick={downloadExcel}
+      >
         Download Excel
       </button>
 
@@ -157,10 +199,13 @@ function App() {
         <tbody>
           {students.map((student) => (
             <tr key={student.id}>
+
               <td>{student.name}</td>
               <td>{student.email}</td>
               <td>{student.age}</td>
+
               <td className="actions">
+
                 <button
                   className="edit-btn"
                   onClick={() => handleEdit(student)}
@@ -174,7 +219,9 @@ function App() {
                 >
                   Delete
                 </button>
+
               </td>
+
             </tr>
           ))}
         </tbody>
