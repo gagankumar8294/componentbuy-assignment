@@ -1,4 +1,5 @@
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 
 function App() {
 
@@ -13,6 +14,16 @@ function App() {
     email: "",
     age: ""
   });
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+
+  setTimeout(() => {
+    setLoading(false);
+  }, 1500);
+
+}, []);
 
   const [editId, setEditId] = useState(null);
 
@@ -75,10 +86,16 @@ const handleSubmit = (e) => {
   setStudents(updatedStudents);
 };
 
+  if (loading) {
+    return <h2>Loading students...</h2>;
+  }
+
   return (
     <div style={{ padding: "20px" }}>
 
       <h1>Students Table</h1>
+
+      
 
       <h2>Add Student</h2>
 
