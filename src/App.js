@@ -2,17 +2,84 @@ import { useState } from "react";
 
 function App() {
 
-  const [students] = useState([
+  const [students, setStudents] = useState([
     { id: 1, name: "Gagan", email: "gagan@gmail.com", age: 23 },
     { id: 2, name: "Ravi", email: "ravi@gmail.com", age: 24 },
     { id: 3, name: "Arjun", email: "arjun@gmail.com", age: 22 }
   ]);
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    age: ""
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.age) {
+      alert("All fields are required");
+      return;
+    }
+
+    const newStudent = {
+      id: Date.now(),
+      name: formData.name,
+      email: formData.email,
+      age: Number(formData.age)
+    };
+
+    setStudents([...students, newStudent]);
+
+    setFormData({
+      name: "",
+      email: "",
+      age: ""
+    });
+  };
+
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
+
       <h1>Students Table</h1>
 
-      <table border="1">
+      <h2>Add Student</h2>
+
+      <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
+
+        <input
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) =>
+            setFormData({ ...formData, name: e.target.value })
+          }
+        />
+
+        <input
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={(e) =>
+            setFormData({ ...formData, email: e.target.value })
+          }
+        />
+
+        <input
+          type="number"
+          placeholder="Age"
+          value={formData.age}
+          onChange={(e) =>
+            setFormData({ ...formData, age: e.target.value })
+          }
+        />
+
+        <button type="submit">Add Student</button>
+
+      </form>
+
+      <table border="1" cellPadding="10">
+
         <thead>
           <tr>
             <th>Name</th>
@@ -37,6 +104,7 @@ function App() {
         </tbody>
 
       </table>
+
     </div>
   );
 }
