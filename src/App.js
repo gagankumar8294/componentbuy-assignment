@@ -38,6 +38,17 @@ function App() {
     });
   };
 
+  const handleDelete = (id) => {
+
+  const confirmDelete = window.confirm("Are you sure you want to delete this student?");
+
+  if (!confirmDelete) return;
+
+  const updatedStudents = students.filter((student) => student.id !== id);
+
+  setStudents(updatedStudents);
+};
+
   return (
     <div style={{ padding: "20px" }}>
 
@@ -97,7 +108,9 @@ function App() {
               <td>{student.age}</td>
               <td>
                 <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => handleDelete(student.id)}>
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
