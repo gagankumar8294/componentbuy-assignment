@@ -1,9 +1,18 @@
+/* Global */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 /* Page background */
 
 body {
   background: linear-gradient(135deg, #4f46e5, #9333ea);
   min-height: 100vh;
   font-family: 'Segoe UI', sans-serif;
+  padding: 10px;
 }
 
 /* Main container */
@@ -19,11 +28,26 @@ body {
   animation: fadeIn 0.6s ease;
 }
 
-/* Heading */
+/* Headings */
 
 h1 {
   text-align: center;
   margin-bottom: 20px;
+}
+
+h2 {
+  margin-bottom: 10px;
+}
+
+/* Success Message */
+
+.success-message {
+  background: #22c55e;
+  color: white;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  margin-bottom: 15px;
 }
 
 /* Form styling */
@@ -69,16 +93,6 @@ button:hover {
   box-shadow: 0 5px 12px rgba(0,0,0,0.2);
 }
 
-/* Delete button */
-
-.delete-btn {
-  background: #ef4444;
-}
-
-.delete-btn:hover {
-  background: #dc2626;
-}
-
 /* Edit button */
 
 .edit-btn {
@@ -89,7 +103,17 @@ button:hover {
   background: #16a34a;
 }
 
-/* Excel button */
+/* Delete button */
+
+.delete-btn {
+  background: #ef4444;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* Download Excel button */
 
 .download-btn {
   margin-bottom: 15px;
@@ -123,6 +147,12 @@ td {
 tr:hover {
   background: #f9fafb;
   transition: 0.2s;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 /* Loading animation */
@@ -162,4 +192,87 @@ tr:hover {
   0% {opacity: 0.4;}
   50% {opacity: 1;}
   100% {opacity: 0.4;}
+}
+
+/* ------------------ RESPONSIVE DESIGN ------------------ */
+
+/* Tablets */
+
+@media (max-width: 900px) {
+
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+}
+
+/* Mobile devices */
+
+@media (max-width: 600px) {
+
+  .container {
+    width: 95%;
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  /* Stack form inputs vertically */
+
+  form {
+    flex-direction: column;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .download-btn {
+    width: 100%;
+  }
+
+  /* Table scroll for small screens */
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+}
+
+/* Extra small phones */
+
+@media (max-width: 400px) {
+
+  .container {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  td,
+  th {
+    padding: 8px;
+    font-size: 14px;
+  }
+
 }
