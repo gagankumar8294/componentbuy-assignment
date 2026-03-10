@@ -1,8 +1,8 @@
-# componentbuy-assignment
+# Sr integrated circuits / componentbuy-assignment
 
 # Students Table – React CRUD Assignment
 
-## 📌 Project Overview
+## Project Overview
 
 This project is a **Students Management Table** built using **React.js**.
 It demonstrates frontend CRUD operations (Create, Read, Update, Delete) using **React state and local data** without a backend.
@@ -20,7 +20,7 @@ The application allows users to add, edit, delete, and download student records 
 
 ---
 
-## ✨ Features
+## Features
 
 ### Student Table
 
@@ -59,7 +59,7 @@ The application allows users to add, edit, delete, and download student records 
 
 ---
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 1. Install dependencies
 
@@ -88,6 +88,18 @@ Update – Edit existing student details
 Delete – Remove student from table
 
 All operations are handled using **React useState**.
+
+---
+
+## Future Improvements
+
+Search and filter students
+
+Download filtered Excel data
+
+LocalStorage persistence
+
+Backend integration using NestJS and PostgreSQL
 
 ---
 
