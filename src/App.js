@@ -14,13 +14,38 @@ function App() {
     age: ""
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [editId, setEditId] = useState(null);
 
-    if (!formData.name || !formData.email || !formData.age) {
-      alert("All fields are required");
-      return;
-    }
+  const handleEdit = (student) => {
+  setFormData({
+    name: student.name,
+    email: student.email,
+    age: student.age
+  });
+
+  setEditId(student.id);
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!formData.name || !formData.email || !formData.age) {
+    alert("All fields are required");
+    return;
+  }
+
+  if (editId) {
+
+    const updatedStudents = students.map((student) =>
+      student.id === editId
+        ? { ...student, ...formData, age: Number(formData.age) }
+        : student
+    );
+
+    setStudents(updatedStudents);
+    setEditId(null);
+
+  } else {
 
     const newStudent = {
       id: Date.now(),
@@ -30,13 +55,14 @@ function App() {
     };
 
     setStudents([...students, newStudent]);
+  }
 
-    setFormData({
-      name: "",
-      email: "",
-      age: ""
-    });
-  };
+  setFormData({
+    name: "",
+    email: "",
+    age: ""
+  });
+};
 
   const handleDelete = (id) => {
 
@@ -85,7 +111,9 @@ function App() {
           }
         />
 
-        <button type="submit">Add Student</button>
+        <button type="submit">
+          {editId ? "Update Student" : "Add Student"}
+        </button>
 
       </form>
 
@@ -107,7 +135,9 @@ function App() {
               <td>{student.email}</td>
               <td>{student.age}</td>
               <td>
-                <button>Edit</button>
+                <button onClick={() => handleEdit(student)}>
+                  Edit
+                </button>
                 <button onClick={() => handleDelete(student.id)}>
                   Delete
                 </button>
